@@ -6,27 +6,26 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/29 00:15:24 by kmurray           #+#    #+#             */
-/*   Updated: 2017/06/29 00:29:16 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/02 00:12:45 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*find_args(char **env, char *str)
+char	*find_arg(char **env, char *str)
 {
 	int	i;
+	int	j;
 
-	i = -1;
-	while (str[++i])
+	i = 0;
+	while (ft_isalnum(str[i]))
+		++i;
+	j = -1;
+	while (env[++j])
 	{
-		if (!ft_isalnum(str[i]) && str[i] != '_')
-			return (NULL);
-	}
-	i = -1;
-	while (env[++i])
-	{
-		if (!ft_strncmp(ft_tolowerstr(env[i]), ft_tolowerstr(str), ft_strlen(str)))
-			return (env[i] + ft_strlen(str) + 1);
+		if (!ft_strncmp(ft_tolowerstr(env[j]), ft_tolowerstr(str), i)
+				&& env[j][i] == '=')
+			return (ft_strdup(env[j] + i + 1));
 	}
 	return (NULL);
 }

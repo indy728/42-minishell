@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:44:43 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/01 18:41:22 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/01 22:52:45 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ int	main(int ac, char **av, char **environ)
 {
 	char *line;
 	char	**env;
-	//char	**args;
 
 	(void)ac;
 	(void)av;
@@ -124,10 +123,7 @@ int	main(int ac, char **av, char **environ)
 		if (!*line)
 			continue ;
 		env = commands(line, env);
-/*		while (commands[++i])
-			ms_execute_command(commands[i], environ);
-		while (i >= 0)
-			ft_strdel(&(commands[i--]));
-*/	}
+	}
+	ft_del_r(env);
 	return (0);
 }
