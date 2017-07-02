@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:44:43 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/01 22:52:45 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/02 01:32:21 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,39 +56,6 @@ char	is_escaped(char *str, int i)
 	return (0);
 }
 
-void	get_commands(char *line, char ***commands)
-{
-	int		i;
-	int		count;
-	char	**cmds;
-
-	i = -1;
-	count = 1;
-	while (line[++i])
-	{
-		if (line[i] ==';' && i && line[i - 1] != '\\'
-				&& !is_open_quote(line, i))
-			++count;
-	}
-	if (!(cmds = ft_memalloc(sizeof(char *) * (count + 1))))
-		exit (1);
-	i = -1;
-	count = 0;
-	while (line[++i])
-	{
-		if (line[i] ==';' && i && line[i - 1] != '\\'
-				&& !is_open_quote(line, i))
-		{
-			cmds[count++] = ft_strndup(line, i);
-			line = line + i + 1;
-			i = -1;
-		}
-	}
-	cmds[count++] = ft_strdup(line);
-	cmds[count] = NULL;
-	*commands = cmds;
-}
-
 char	**commands(char *line, char **env)
 {
 	char	**commands;
@@ -96,7 +63,6 @@ char	**commands(char *line, char **env)
 
 	i = -1;
 	commands = ms_strsplit(line, ';');
-	ft_print_r(commands);
 	while (commands[++i])
 		env = ms_execute_command(commands[i], env);
 	ft_del_r(commands);
@@ -122,7 +88,8 @@ int	main(int ac, char **av, char **environ)
 		}
 		if (!*line)
 			continue ;
-		env = commands(line, env);
+		if (!(env = commands(line, env)))
+			break ;
 	}
 	ft_del_r(env);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 00:30:12 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/01 23:56:33 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/02 01:25:03 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft.h"
 # include <sys/wait.h>
 
-void	ms_echo(char *line);
+void	ms_echo(char **args);
 char	is_open_quote(char *str, int pos);
 char	is_escaped(char *str, int pos);
 char	**ms_execute_command(char *command, char **env);
