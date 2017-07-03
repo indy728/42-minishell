@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolowerstr.c                                    :+:      :+:    :+:   */
+/*   ft_dupn_r.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/21 18:44:51 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 17:15:19 by kmurray          ###   ########.fr       */
+/*   Created: 2017/07/01 15:07:20 by kmurray           #+#    #+#             */
+/*   Updated: 2017/07/02 16:07:09 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_tolowerstr(char *str)
+char	**ft_dupn_r(char **arr, int size)
 {
-	char	tmp[ft_strlen(str)];
+	char	**dup;
 	int		i;
 
-	i = 0;
-	while (str[i])
-	{
-		if ('A' <= str[i] && str[i] <= 'Z')
-			tmp[i] += ('a' - 'A');
-		else
-			tmp[i] = str[i];
-		++i;
-	}
-	tmp[i] = '\0';
-	return (str);
+	i = -1;
+	if (!(dup = ft_memalloc(sizeof(char *) * (size + 1))))
+		return (NULL);
+	while (arr[++i] && i < size)
+		dup[i] = ft_strdup(arr[i]);
+	while (++i <= size)
+		dup[i] = NULL;
+	return (dup);
 }

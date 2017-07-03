@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:44:43 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 01:32:21 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/02 16:25:53 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,43 +19,6 @@ void	sys_prompt(void)
 	ft_printf("~%s $> ", cwd);
 }
 
-int		escape(char *str, int i)
-{
-	if (i > 0 && str[i - 1] == '\\')
-		return (1);
-	return (0);
-}
-
-char	is_open_quote(char *str, int pos)
-{
-	int		quote;
-	char	type;
-	int	i;
-
-	i = -1;
-	quote = 0;
-	while (++i < pos && str[i])
-	{
-		if (!quote && (str[i] == '"' || str[i] == '\'') && !escape(str, i))
-		{
-			++quote;
-			type = str[i];
-		}
-		else if (quote && str[i] == type && !escape(str, i))
-			--quote;
-	}
-	if (quote)
-		return (type);
-	return (0);
-}
-
-char	is_escaped(char *str, int i)
-{
-	if ((i && str[i - 1] == '\\') || is_open_quote(str, i))
-		return (1);
-	return (0);
-}
-
 char	**commands(char *line, char **env)
 {
 	char	**commands;
@@ -63,7 +26,7 @@ char	**commands(char *line, char **env)
 
 	i = -1;
 	commands = ms_strsplit(line, ';');
-	while (commands[++i])
+	while (commands[++i] && !g_exit)
 		env = ms_execute_command(commands[i], env);
 	ft_del_r(commands);
 	return (env);
@@ -71,14 +34,15 @@ char	**commands(char *line, char **env)
 
 int	main(int ac, char **av, char **environ)
 {
-	char *line;
+	char	*line;
 	char	**env;
 
 	(void)ac;
 	(void)av;
+	g_exit = 0;
 	if (!(env = ft_dup_r(environ)))
 		ft_exit_malloc_error("ft_dup_r", ft_size_r(environ));
-	while (1)
+	while (!g_exit)
 	{
 		sys_prompt();
 		if (get_next_line(0, &line) < 0)
@@ -88,9 +52,9 @@ int	main(int ac, char **av, char **environ)
 		}
 		if (!*line)
 			continue ;
-		if (!(env = commands(line, env)))
-			break ;
+		env = commands(line, env);
 	}
+	ft_strdel(&line);
 	ft_del_r(env);
 	return (0);
 }

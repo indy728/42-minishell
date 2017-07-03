@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 12:26:25 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/01 16:03:41 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/02 15:53:04 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ char				*ft_strtrim(char const *str);
 char				**ft_strsplit(char const *str, char c);
 
 char				**ft_dup_r(char **arr);
+char				**ft_dupn_r(char **arr, int size);
 int					ft_size_r(char **arr);
 void				ft_print_r(char **arr);
 void				ft_del_r(char **arr);

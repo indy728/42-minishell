@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 22:33:36 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 00:49:12 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/02 17:18:25 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*handle_variables(char **str, char **env)
 	{
 		if ((*str)[i] != '$' || is_open_quote((*str), i) == '\'')
 			new[j++] = (*str)[i];
-		else if ((env_arg = find_arg(env, (*str) + ++i)))
+		else if ((env_arg = find_arg((*str) + ++i, env)))
 		{
 			ft_strcat(new, env_arg);
 			j += ft_strlen(env_arg);
