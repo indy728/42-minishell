@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/24 20:58:41 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 01:25:17 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/02 19:00:01 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,6 @@ void	ms_echo(char **args)
 	while (i < size - 1)
 		ft_printf("%s ", args[i++]);
 	nl ? ft_printf("%s%%\n", args[i]) : ft_putendl(args[i]);
+	if (!args[i] && !nl)
+		ft_putendl("");
 }

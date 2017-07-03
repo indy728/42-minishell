@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 00:30:12 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 17:34:27 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/02 21:52:56 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <sys/wait.h>
 
 # define SETENV_USAGE "usage: setenv [env var (must be alpha-numeric)] [optional = value]" 
+# define UNSETENV_USAGE "usage: unsetenv [env var (must be alpha-numeric)]" 
+
+# define CWD_BUF 1024
 
 # define BLACK "\x1b[30m"
 # define RED "\x1b[31m"
@@ -42,11 +45,13 @@ char	*find_arg(char *str, char **env);
 int		get_env_arg(char *str, char **env);
 char	is_open_quote(char *str, int pos);
 char	is_escaped(char *str, int pos);
+char	**ms_cd(char **args, char **env);
 void	ms_convert_args(char **str, char **env);
 void	ms_echo(char **args);
 char	*ms_epurstr(char *str);
 char	**ms_execute_command(char *command, char **env);
 char	**ms_setenv(char **args, char **env);
 char	**ms_strsplit(char *str, char c);
+char	**ms_unsetenv(char **str, char **env);
 
 #endif

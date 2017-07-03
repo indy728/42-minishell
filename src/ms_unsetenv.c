@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_setenv.c                                        :+:      :+:    :+:   */
+/*   ms_unsetenv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/02 16:27:46 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 19:11:42 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/02 19:29:44 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*new_env_var(char **args)
-{
-	char	*str;
-
-	str = args[2]
-		? ft_strnew(ft_strlen(args[1]) + 1 + ft_strlen(args[2]))
-		: ft_strnew(ft_strlen(args[1]) + 1);
-	str = ft_strcpy(str, args[1]);
-	str = ft_strcat(str, "=");
-	if (args[2])
-		str = ft_strcat(str, args[2]);
-	return (str);
-}
-
-int		setenv_usage(char **args)
+int		unsetenv_usage(char **args)
 {
 	int	i;
 
@@ -41,30 +27,23 @@ int		setenv_usage(char **args)
 	return (1);
 }
 
-char	**ms_setenv(char **args, char **env)
+char	**ms_unsetenv(char **args, char **env)
 {
 	char	**new;
 	int		n;
-	char	*tmp;
 
-	if (!setenv_usage(args))
+	if (!unsetenv_usage(args))
 	{
-		ft_putendl(SETENV_USAGE);
+		ft_putendl(UNSETENV_USAGE);
 		return (env);
 	}
 	n = get_env_arg(args[1], env);
 	if (n < 0)
-	{
-		new = ft_dupn_r(env, ft_size_r(env) + 1);
-		new[ft_size_r(env)] = new_env_var(args);;
-	}
+		ft_printf("environment variable '%s' does not exist!\n", args[1]);
 	else
 	{
-		new = ft_dupn_r(env, ft_size_r(env));
-		tmp = new[n];
-		new[n] = new_env_var(args);;
-		ft_strdel(&tmp);
+		new = ft_pop_r(env, n);
+		ft_del_r(env);
 	}
-	ft_del_r(env);
-	return (new);
+	return (n < 0 ? env : new);
 }

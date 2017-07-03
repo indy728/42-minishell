@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 22:07:13 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 17:27:12 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/02 21:33:54 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ char	**ms_execute_command(char *command, char **env)
 	ms_convert_args(args, env);
 	if (!ft_strcmp(args[0], "echo"))
 		ms_echo(args);
-//	else if (!ft_strcmp(args[0], "cd"))
-//		env = ms_cd(args, env);
+	else if (!ft_strcmp(args[0], "cd"))
+		env = ms_cd(args, env);
 	else if (!ft_strcmp(args[0], "env"))
 		ft_print_r(env);
 	else if (!ft_strcmp(args[0], "setenv"))
 		env = ms_setenv(args, env);
-//	else if (!ft_strcmp(args[0], "unsetenv"))
-//		env = ms_unsetenv(args, env);
+	else if (!ft_strcmp(args[0], "unsetenv"))
+		env = ms_unsetenv(args, env);
 	else if (!ft_strcmp(args[0], "exit"))
 		g_exit = 1;
 	ft_del_r(args);

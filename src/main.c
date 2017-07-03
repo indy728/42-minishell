@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:44:43 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 16:25:53 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/02 21:34:39 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sys_prompt(void)
 {
-	char cwd[1024];
+	char cwd[CWD_BUF];
 	getcwd(cwd, sizeof(cwd));
 	ft_printf("~%s $> ", cwd);
 }
