@@ -6,7 +6,7 @@
 #    By: kmurray <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/24 00:13:00 by kmurray           #+#    #+#              #
-#    Updated: 2017/07/02 21:53:08 by kmurray          ###   ########.fr        #
+#    Updated: 2017/07/03 00:03:07 by kmurray          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC_NAME = main.c ms_execute_commands.c ms_echo.c\
 		   ms_epurstr.c ms_convert_args.c ms_strsplit.c\
 		   ms_find_args.c ms_escape.c ms_setenv.c ms_unsetenv.c\
-		   ms_cd.c
+		   ms_cd.c ms_exe.c
 
 all: $(NAME)
 

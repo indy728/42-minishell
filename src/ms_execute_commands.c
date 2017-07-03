@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 22:07:13 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 21:33:54 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/03 00:05:54 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ char	**ms_execute_command(char *command, char **env)
 		env = ms_unsetenv(args, env);
 	else if (!ft_strcmp(args[0], "exit"))
 		g_exit = 1;
+	else
+		ms_exe(args, env);
 	ft_del_r(args);
 	return (env);
 }
