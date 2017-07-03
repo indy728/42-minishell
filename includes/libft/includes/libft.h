@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 12:26:25 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 19:24:14 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/03 13:48:02 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char				*ft_strndup(char const *str, size_t size);
 char				*ft_strmove(char *dest, char **src);
 char				*ft_strcpy(char *dest, char const *src);
 char				*ft_strncpy(char *dest, char const *src, size_t n);
+
 char				*ft_strcat(char *s1, char const *s2);
 char				*ft_strncat(char *s1, char const *s2, size_t n);
 size_t				ft_strlcat(char *s1, char const *s2, size_t size);
@@ -64,6 +65,9 @@ char				*ft_strrchr(char const *str, int c);
 char				*ft_strstr(char const *big, char const *little);
 char				*ft_strnstr(char const *big, char const
 							*little, size_t len);
+int					ft_strlstr(char const *big, char const *little);
+int					ft_strlnstr(char const *big, char const *little);
+
 int					ft_strcmp(char const *s1, char const *s2);
 int					ft_strncmp(char const *s1, char const *s2, size_t n);
 char				*ft_strnew(size_t size);

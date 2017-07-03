@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/02 19:42:36 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 23:14:54 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/03 14:29:29 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ void	set_pwd(char *oldpwd, char **env)
 	int		n;
 	char	cwd[CWD_BUF];
 
+	getcwd(cwd, CWD_BUF);
 	if ((n = get_env_arg("OLDPWD", env)) < 0)
-		/*sudo_set("OLDPWD", oldpwd, env)*/;
+		/*ms_builddir("OLDPWD", oldpwd, env)*/;
 	else
 	{
 		tmp = env[n]; 
 		env[n] = ft_strjoin("OLDPWD=", oldpwd);
 		ft_strdel(&tmp);
 	}
-	getcwd(cwd, CWD_BUF);
 	if ((n = get_env_arg("PWD", env)) < 0)
-		/*sudo_set("PWD", cwd, env)*/;
+		/*ms_builddir_set("PWD", cwd, env)*/;
 	else
 	{
 		tmp = env[n]; 
@@ -56,12 +56,17 @@ char	**ms_cd(char **args, char **env)
 	char	*new_dir;
 	char	cwd[CWD_BUF];
 
-	//check if HOME exists
+	getcwd(cwd, CWD_BUF);
 	if (!args[1] || !ft_strcmp(args[1], "~"))
-		new_dir = ft_strdup(find_arg("HOME", env));
+	{
+		if (!(new_dir = find_arg("HOME", env)) || !*new_dir)
+		{
+			/*ms_builddir("HOME", cwd, env)*/;
+			new_dir = find_arg("HOME", env);
+		}
+	}
 	else
 		new_dir = ft_strdup(args[1]);
-	getcwd(cwd, CWD_BUF);
 	if (chdir(new_dir) < 0)
 		chdir_err(new_dir);
 	else

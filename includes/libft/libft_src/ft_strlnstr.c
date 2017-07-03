@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmove.c                                       :+:      :+:    :+:   */
+/*   ft_strlnstr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/24 13:48:03 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/03 14:00:29 by kmurray          ###   ########.fr       */
+/*   Created: 2016/11/29 22:40:08 by kmurray           #+#    #+#             */
+/*   Updated: 2017/07/03 13:51:50 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmove(char *dest, char **src)
+int	ft_strlnstr(char const *big, char const *little)
 {
-	char	*tmp;
+	size_t	i;
+	size_t	j;
 
-	if (!dest)
-		return (NULL);
-	tmp = *src;
-	*src = dest;
-	ft_strdel(&tmp);
-	return (*src);
+	i = 0;
+	while (big[i])
+	{
+		j = 0;
+		while (big[i++] == little[j++])
+		{
+			if (little[j] == '\0')
+				return (i);
+		}
+		i++;
+	}
+	if (*little == '\0')
+		return (ft_strlen(big));
+	return (-1);
 }
