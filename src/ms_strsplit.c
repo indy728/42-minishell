@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/29 01:08:46 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/01 18:47:37 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/04 15:57:33 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ char	**ms_strsplit(char *str, char c)
 
 	i = -1;
 	n = 0;
-//	if (!str)
-//		return (NULL);
 	cw = ms_count_args(str, c);
 	if (!(split = (char **)malloc((sizeof(char *) * (cw + 1)))))
 		return (NULL);
@@ -62,7 +60,6 @@ char	**ms_strsplit(char *str, char c)
 		wl = ms_arglen(str + n, c);
 		if (!(split[i] = ft_strsub(str, n, wl)))
 		{
-			split[i] = NULL;
 			ft_del_r(split);
 			return (NULL);
 		}

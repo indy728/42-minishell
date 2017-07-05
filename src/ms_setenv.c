@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/02 16:27:46 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 19:11:42 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/05 00:11:51 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,20 @@ char	**ms_setenv(char **args, char **env)
 
 	if (!setenv_usage(args))
 	{
-		ft_putendl(SETENV_USAGE);
+		ft_printf("usage: setenv: "SETENV_USAGE"\n");
 		return (env);
 	}
 	n = get_env_arg(args[1], env);
 	if (n < 0)
 	{
 		new = ft_dupn_r(env, ft_size_r(env) + 1);
-		new[ft_size_r(env)] = new_env_var(args);;
+		new[ft_size_r(env)] = new_env_var(args);
 	}
 	else
 	{
 		new = ft_dupn_r(env, ft_size_r(env));
 		tmp = new[n];
-		new[n] = new_env_var(args);;
+		new[n] = new_env_var(args);
 		ft_strdel(&tmp);
 	}
 	ft_del_r(env);

@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/02 23:53:01 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/03 01:00:40 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/04 22:25:04 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ char	**ms_add_exe(char **paths, char *exe)
 	return (paths);
 }
 
-int	ms_exe(char **args, char **env)
+int		ms_exe(char **args, char **env)
 {
 	char	*str;
 	char	**paths;
 	pid_t	pid;
 	int		i;
 
-	if(!(str = find_arg("PATH", env)))
+	if (!(str = find_arg("PATH", env)))
 		return (0);
 	i = -1;
 	paths = ft_strsplit(str, ':');
@@ -46,9 +46,11 @@ int	ms_exe(char **args, char **env)
 	pid = fork();
 	if (!pid)
 	{
+		execve(args[0], args, env);
 		while (paths[++i])
 			execve(paths[i], args, env);
 		ft_printf("%s: command not found.\n", args[0]);
+		g_exit = 1;
 	}
 	else if (pid < 0)
 		return (-1);

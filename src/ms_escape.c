@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/02 15:06:20 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 15:07:46 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/04 17:53:29 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	is_open_quote(char *str, int pos)
 {
 	int		quote;
 	char	type;
-	int	i;
+	int		i;
 
 	i = -1;
 	quote = 0;

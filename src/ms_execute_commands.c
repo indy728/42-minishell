@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 22:07:13 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/03 00:05:54 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/04 19:49:30 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ char	**ms_execute_command(char *command, char **env)
 	args = ms_strsplit(command, ' ');
 	ft_strdel(&command);
 	ms_convert_args(args, env);
-	if (!ft_strcmp(args[0], "echo"))
+	if (!*args[0])
+		;
+	else if (!ft_strcmp(args[0], "echo"))
 		ms_echo(args);
 	else if (!ft_strcmp(args[0], "cd"))
 		env = ms_cd(args, env);

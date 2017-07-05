@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/01 15:07:20 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 19:22:22 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/04 19:36:10 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,18 @@ char	**ft_pop_r(char **arr, int n)
 {
 	char	**dup;
 	int		i;
+	int		j;
 
 	i = -1;
+	j = -1;
 	if (!(dup = ft_memalloc(sizeof(char *) * (ft_size_r(arr)))))
 		return (NULL);
 	while (arr[++i])
 	{
 		if (i == n)
 			continue ;
-		dup[i] = ft_strdup(arr[i]);
+		dup[++j] = ft_strdup(arr[i]);
 	}
-	dup[i] = NULL;
+	dup[++j] = NULL;
 	return (dup);
 }

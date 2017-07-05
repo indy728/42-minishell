@@ -6,13 +6,13 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/24 20:58:41 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 19:00:01 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/04 17:52:20 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int nl_flag(char **args)
+int		nl_flag(char **args)
 {
 	if (args[1] && !ft_strcmp(args[1], "-n"))
 		return (1);

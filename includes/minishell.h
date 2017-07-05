@@ -6,19 +6,20 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/24 00:30:12 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/03 01:00:11 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/05 01:00:29 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MSH_H
-# define MSH_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include "libft.h"
 # include <sys/wait.h>
 # include <signal.h>
 
-# define SETENV_USAGE "usage: setenv [env var (must be alpha-numeric)] [optional = value]" 
-# define UNSETENV_USAGE "usage: unsetenv [env var (must be alpha-numeric)]" 
+# define SETENV_USAGE "[env var (must be alpha-numeric)] [optional: value]"
+# define UNSETENV_USAGE "[env var (must be alpha-numeric)]"
+# define MS_USAGE "-p [custom line prompt] [optional: color]"
 
 # define CWD_BUF 1024
 

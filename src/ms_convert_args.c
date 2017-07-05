@@ -6,65 +6,58 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 22:33:36 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 17:18:25 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/04 21:19:33 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*handle_variables(char **str, char **env)
+char	*handle_variables(char *str, char **env)
 {
-	char	new[1024];
+	char	*new;
 	int		i;
 	int		j;
 	char	*env_arg;
+	char	help[CWD_BUF];
 
-	i = -1;	
-	j = 0;
-	ft_memset(new, 0, 1024);
-	while ((*str)[++i])
+	i = -1;
+	new = ft_strdup(str);
+	while (str[++i])
 	{
-		if ((*str)[i] != '$' || is_open_quote((*str), i) == '\'')
-			new[j++] = (*str)[i];
-		else if ((env_arg = find_arg((*str) + ++i, env)))
+		j = 1;
+		if (str[i] == '$' && is_open_quote(str, i) != '\'')
 		{
-			ft_strcat(new, env_arg);
-			j += ft_strlen(env_arg);
-			while (ft_isalnum((*str)[i + 1]))
-				++i;
+			while (ft_isalnum(str[i + j]))
+				++j;
+			if (!(env_arg = find_arg(str + i + 1, env)))
+				env_arg = ft_strdup("");
+			new = ft_strmove(ft_strsubstr(new,
+					ft_strncpy(help, str + i, j), env_arg),
+					&new);
 			ft_strdel(&env_arg);
 		}
-		else
-		{	
-			while (ft_isalnum((*str)[++i + 1]))
-				;
-		}
 	}
-	new[j] = '\0';
-	ft_strdel(str);
-	return(ft_strdup(new));
+	return (new);
 }
 
-char	*remove_quotes(char **str)
+char	*remove_quotes(char *str)
 {
-	char	new[1024];
+	char	*new;
 	int		i;
 	int		j;
 
-	i = -1;	
+	i = -1;
 	j = 0;
-	ft_memset(new, 0, 1024);
-	while ((*str)[++i])
+	new = ft_strnew(CWD_BUF);
+	while (str[++i])
 	{
-		if (((*str)[i] == '"' && is_open_quote((*str), i) != '\'')
-				|| ((*str)[i] == '\'' && is_open_quote((*str), i) != '"'))
+		if ((str[i] == '"' && is_open_quote(str, i) != '\'')
+				|| (str[i] == '\'' && is_open_quote(str, i) != '"'))
 			continue ;
 		else
-			new[j++] = (*str)[i];
+			new[j++] = str[i];
 	}
-	new[j] = '\0';
-	ft_strdel(str);
-	return(ft_strdup(new));
+	return (new);
 }
 
 char	get_escapechar(char c)
@@ -85,32 +78,31 @@ char	get_escapechar(char c)
 		return (13);
 }
 
-char	*handle_escapes(char **str)
+char	*handle_escapes(char *str)
 {
-	char	new[1024];
+	char	*new;
 	int		i;
 	int		j;
 
 	i = -1;
 	j = 0;
-	while ((*str)[++i])
+	new = ft_strnew(CWD_BUF);
+	while (str[++i])
 	{
-		if ((*str)[i] == '\\')
+		if (str[i] == '\\')
 		{
-			while ((*str)[i + 1] == '\\')
+			while (str[i + 1] == '\\')
 				++i;
-			if (ft_strchr("abfnrtv", (*str)[i + 1]))
+			if (ft_strchr("abfnrtv", str[i + 1]))
 			{
-				new[j++] = get_escapechar((*str)[i + 1]);
+				new[j++] = get_escapechar(str[i + 1]);
 				++i;
 			}
 			++i;
 		}
-		new[j++] = (*str)[i];
+		new[j++] = str[i];
 	}
-	new[j] = '\0';
-	ft_strdel(str);
-	return(ft_strdup(new));
+	return (new);
 }
 
 void	ms_convert_args(char **args, char **env)
@@ -120,8 +112,8 @@ void	ms_convert_args(char **args, char **env)
 	i = -1;
 	while (args[++i])
 	{
-		args[i] = handle_escapes(&(args[i]));
-		args[i] = handle_variables(&(args[i]), env);
-		args[i] = remove_quotes(&(args[i]));
+		args[i] = ft_strmove(handle_escapes(args[i]), &(args[i]));
+		args[i] = ft_strmove(handle_variables(args[i], env), &(args[i]));
+		args[i] = ft_strmove(remove_quotes(args[i]), &(args[i]));
 	}
 }

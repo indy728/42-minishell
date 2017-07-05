@@ -6,26 +6,26 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/29 22:40:08 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/03 13:47:39 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/04 21:17:47 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strlstr(char const *big, char const *little)
+int	ft_strlstr(char *big, char *little)
 {
 	size_t	i;
 	size_t	j;
 	size_t	k;
-	char	*b1;
 
 	i = 0;
-	b1 = (char *)big;
-	while (b1[i])
+	if (!big || !little)
+		return (0);
+	while (big[i])
 	{
 		j = 0;
 		k = i;
-		while (b1[i] == little[j])
+		while (big[i] == little[j])
 		{
 			i++;
 			j++;

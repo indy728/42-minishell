@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/02 16:27:46 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/02 19:29:44 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/05 00:12:31 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,21 @@ char	**ms_unsetenv(char **args, char **env)
 
 	if (!unsetenv_usage(args))
 	{
-		ft_putendl(UNSETENV_USAGE);
+		ft_printf("usage: unsetenv: "UNSETENV_USAGE"\n");
 		return (env);
 	}
 	n = get_env_arg(args[1], env);
 	if (n < 0)
 		ft_printf("environment variable '%s' does not exist!\n", args[1]);
+	else if (!ft_strcmp(args[1], "HOME")
+			|| !ft_strcmp(args[1], "PWD")
+			|| !ft_strcmp(args[1], "OLDPWD"))
+		ft_printf("illegal unset: do not unset $%s\n", args[1]);
 	else
 	{
 		new = ft_pop_r(env, n);
 		ft_del_r(env);
+		return (new);
 	}
-	return (n < 0 ? env : new);
+	return (env);
 }
