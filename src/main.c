@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/21 15:44:43 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/05 01:23:53 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/05 02:36:58 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char	**get_prompt(int ac, char **av)
 {
 	char	**prompt;
 
+	ft_printf(CLEAR BBLACK BOLD RED MINISH2 RESET"\n");
 	if (2 < ac && ac <= 4 && !ft_strcmp(av[1], "-p"))
 	{
 		prompt = ft_memalloc(sizeof(char *) * 3);
@@ -64,8 +65,10 @@ char	**get_prompt(int ac, char **av)
 		return (prompt);
 	}
 	else if (ac > 1)
+	{
 		ft_printf("usage: minishell: "MS_USAGE"\n");
-	g_exit = 1;
+		g_exit = 1;
+	}
 	return (NULL);
 }
 
