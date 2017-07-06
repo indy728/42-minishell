@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:17:07 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/05 23:16:17 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/06 00:30:08 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	sys_prompt(char **prompt, char **env)
 	if (g_nl)
 	{
 		g_nl = 0;
-		ft_printf(BWHITE BLACK "%%" RESET "\n");
+		ft_printf(BWHITE""BLACK"%%"RESET"\n");
 	}
 	if (prompt)
-		ft_printf("%s%s "RESET, prompt[1], prompt[0]);
+		ft_printf("%s%s " RESET, prompt[1], prompt[0]);
 	else
 	{
 		getcwd(cwd, sizeof(cwd));
@@ -62,9 +62,9 @@ char	**get_prompt(int ac, char **av)
 
 	g_exit = 0;
 	g_nl = 0;
-	ft_printf(CLEAR BBLUE BOLD RED);
+	ft_printf(CLEAR""BBLUE""BOLD""RED);
 	ft_printfile("ascii_art/header.txt");
-	ft_printf(RESET"\n");
+	ft_printf(RESET "\n");
 	if (2 < ac && ac <= 4 && !ft_strcmp(av[1], "-p"))
 	{
 		prompt = ft_memalloc(sizeof(char *) * 3);
@@ -75,7 +75,7 @@ char	**get_prompt(int ac, char **av)
 	}
 	else if (ac > 1)
 	{
-		ft_printf(CLEAR"usage: minishell: "MS_USAGE"\n");
+		ft_printf(CLEAR"usage: minishell: " MS_USAGE "\n");
 		g_exit = 1;
 	}
 	return (NULL);
