@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/02 23:53:01 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/05 20:14:52 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/06 00:50:42 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		ms_exe(char **args, char **env)
 		while (paths && paths[++i])
 			execve(paths[i], args, env);
 		ft_printf("%s: command not found.\n", args[0]);
-		g_exit = 2;
+		exit(0);
 	}
 	else if (pid < 0)
 		return (-1);
