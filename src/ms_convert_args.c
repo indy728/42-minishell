@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/28 22:33:36 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/04 21:19:33 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/05 20:13:10 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,7 @@ void	ms_convert_args(char **args, char **env)
 		args[i] = ft_strmove(handle_escapes(args[i]), &(args[i]));
 		args[i] = ft_strmove(handle_variables(args[i], env), &(args[i]));
 		args[i] = ft_strmove(remove_quotes(args[i]), &(args[i]));
+		if (!ft_strcmp(args[i], "~"))
+			args[i] = ft_strmove(find_arg("HOME", env), &(args[i]));
 	}
 }

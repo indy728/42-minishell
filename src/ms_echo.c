@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/24 20:58:41 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/04 17:52:20 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/05 20:32:53 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,17 @@ int		nl_flag(char **args)
 
 void	ms_echo(char **args)
 {
-	char	nl;
 	int		size;
 	int		i;
 
 	i = 1;
-	nl = nl_flag(args);
+	g_nl = nl_flag(args);
 	size = ft_size_r(args);
 	while (args[i] && !ft_strcmp(args[i], "-n"))
 		++i;
 	while (i < size - 1)
 		ft_printf("%s ", args[i++]);
-	nl ? ft_printf("%s%%\n", args[i]) : ft_putendl(args[i]);
-	if (!args[i] && !nl)
+	g_nl ? ft_putstr(args[i]) : ft_putendl(args[i]);
+	if (!args[i] && !g_nl)
 		ft_putendl("");
 }

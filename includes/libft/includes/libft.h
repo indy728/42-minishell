@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 12:26:25 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/05 00:27:03 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/05 20:50:29 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,10 @@ void				ft_putstr_fd(char const *str, int fd);
 void				ft_putendl_fd(char const *str, int fd);
 void				ft_putnbr_fd(int n, int fd);
 int					ft_putlnbr_fd(int n, int fd, int i);
+void				ft_printfile(char *path);
+
 void				ft_exit_malloc_error(char *str, size_t size);
+void				ft_exit_read_error(char *str, char **line, int fd);
 
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstcat(t_list **alst, t_list *new);

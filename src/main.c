@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/21 15:44:43 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/05 02:36:58 by kmurray          ###   ########.fr       */
+/*   Created: 2017/07/05 22:17:07 by kmurray           #+#    #+#             */
+/*   Updated: 2017/07/05 22:17:10 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void	sys_prompt(char **prompt, char **env)
 	char	*home;
 	int		n;
 
+	if (g_nl)
+	{
+		g_nl = 0;
+		ft_printf(BWHITE BLACK "%%" RESET "\n");
+	}
 	if (prompt)
 		ft_printf("%s%s "RESET, prompt[1], prompt[0]);
 	else
@@ -55,7 +60,11 @@ char	**get_prompt(int ac, char **av)
 {
 	char	**prompt;
 
-	ft_printf(CLEAR BBLACK BOLD RED MINISH2 RESET"\n");
+	g_exit = 0;
+	g_nl = 0;
+	ft_printf(CLEAR BBLUE BOLD RED);
+	ft_printfile("ascii_art/header.txt");
+	ft_printf(RESET"\n");
 	if (2 < ac && ac <= 4 && !ft_strcmp(av[1], "-p"))
 	{
 		prompt = ft_memalloc(sizeof(char *) * 3);
@@ -82,6 +91,8 @@ char	**commands(char *line, char **env)
 	while (commands[++i] && !g_exit)
 		env = ms_execute_command(commands[i], env);
 	ft_del_r(commands);
+	if (g_exit == 1)
+		ft_printf(CLEAR);
 	return (env);
 }
 
@@ -91,7 +102,6 @@ int		main(int ac, char **av, char **environ)
 	char	**env;
 	char	**prompt;
 
-	g_exit = 0;
 	prompt = get_prompt(ac, av);
 	if (!(env = ft_dup_r(environ)))
 		ft_exit_malloc_error("ft_dup_r", (ft_size_r(environ) + 1) * 8);
@@ -102,7 +112,8 @@ int		main(int ac, char **av, char **environ)
 		if (get_next_line(0, &line) < 0)
 		{
 			ft_del_r(env);
-			exit (1); ////// read error
+			ft_del_r(prompt);
+			ft_exit_read_error("get_next_line", &line, 0);
 		}
 		if (!*line)
 			continue ;
