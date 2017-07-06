@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/02 19:42:36 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/04 20:51:29 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/05 22:43:08 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	chdir_err(char *invalid)
 
 	if (access(invalid, F_OK) == -1)
 		msg = ft_strdup("no such file or directory: ");
-	else if (access(invalid, R_OK) == -1)
+	else if (access(invalid, R_OK | W_OK) == -1)
 		msg = ft_strdup("permission denied: ");
 	else
 		msg = ft_strdup("not a directory: ");

@@ -6,7 +6,7 @@
 /*   By: kmurray <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/05 22:17:07 by kmurray           #+#    #+#             */
-/*   Updated: 2017/07/05 22:17:10 by kmurray          ###   ########.fr       */
+/*   Updated: 2017/07/05 23:16:17 by kmurray          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	**get_prompt(int ac, char **av)
 	}
 	else if (ac > 1)
 	{
-		ft_printf("usage: minishell: "MS_USAGE"\n");
+		ft_printf(CLEAR"usage: minishell: "MS_USAGE"\n");
 		g_exit = 1;
 	}
 	return (NULL);
